@@ -1,6 +1,6 @@
 FROM node:alpine AS build
 COPY ./ .
-ENV REACT_APP_HELLO=Hello
+ENV REACT_APP_HELLO="Hello Kubernetes"
 RUN npm install && \
 npm run build
 
