@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 function App() {
- /* const [data, setData] = useState(null);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -9,7 +9,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:8080');
+      const response = await fetch('backend-clusterip:8080');
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
@@ -20,22 +20,15 @@ function App() {
   if (data === null) {
     return <div>Loading...</div>;
   }
-  */
-
-  /*
-      <ul>
-        {data.map((item) => (
-          <li>{item.hello}</li>
-        ))}
-      </ul>
-    */
 
 
   // Render your component with the fetched data
   return (
-    <div>
-      <h1>{process.env.REACT_APP_HELLO}</h1>
-    </div>
+    <ul>
+    {data.map((item) => (
+      <li>{item.hello}</li>
+    ))}
+  </ul>
   );
 }
 

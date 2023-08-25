@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	host     = "172.18.0.2"
+	host     = "db-clusterip"
 	port     = 5432
 	user     = "postgres"
 	password = "admin"
