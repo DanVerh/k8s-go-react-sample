@@ -9,7 +9,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://backend-clusterip:8080');
+      const response = await fetch('http://localhost:8080');
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
