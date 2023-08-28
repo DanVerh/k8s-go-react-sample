@@ -1,0 +1,7 @@
+# Common variables
+namespace: app
+
+# Deployment variables
+replicas: 1
+containers:
+  imageVersion: latest

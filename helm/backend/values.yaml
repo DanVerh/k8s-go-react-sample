@@ -1,0 +1,5 @@
+namespace: app
+
+replicas: 2
+containers:
+  imageVersion: latest

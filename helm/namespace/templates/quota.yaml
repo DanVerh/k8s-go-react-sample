@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: app-resourcequota
-  namespace: app
+  namespace: {{ .Values.namespace }}
 spec:
   hard:
-    pods: "20"
+    pods: {{ .Values.quota }}
