@@ -1,0 +1,14 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: frontend-pdb
+  namespace: app
+spec:
+{{ if eq .Values.replicas 1.0 }}
+  minAvailable: 1
+{{ else }}
+  minAvailable: {{ sub .Values.replicas 1.0 }}
+{{ end }}
+  selector:
+    matchLabels:
+      app: frontend
