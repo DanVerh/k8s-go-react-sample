@@ -19,8 +19,6 @@ spec:
       securityContext:
         runAsUser: 1000
         runAsNonRoot: true
-        readOnlyRootFilesystem: true
-        allowPrivilleageEscalation: false
       containers:
         # Image specs
       - name: backend
@@ -49,3 +47,6 @@ spec:
           periodSeconds: 5
         # Pull Policy
         imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilleageEscalation: false
