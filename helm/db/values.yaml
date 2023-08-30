@@ -1,0 +1,7 @@
+# Common variables
+namespace: test
+
+# Deployment variables
+replicas: 1
+containers:
+  imageVersion: latest

@@ -1,0 +1,5 @@
+namespace: test
+
+replicas: 2
+containers:
+  imageVersion: latest
