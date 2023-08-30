@@ -16,6 +16,11 @@ spec:
       labels:
         app: backend
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsNonRoot: true
+        readOnlyRootFilesystem: true
+        allowPrivilleageEscalation: false
       containers:
         # Image specs
       - name: backend
