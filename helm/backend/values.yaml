@@ -1,5 +1,6 @@
 namespace: test
 
 replicas: 1
+port: 8080
 containers:
   imageVersion: latest
