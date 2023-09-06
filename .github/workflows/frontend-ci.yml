@@ -17,19 +17,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Docker Build
     - uses: actions/checkout@v3
+    
+    - name: Docker Build
       working-directory: ./frontend
       run: docker image build --tag danverh/react-sample:latest .
     
     - name: Docker Login
-    - uses: docker/login-action@v2.2.0
+      uses: docker/login-action@v2.2.0
       with:
         username: $DOCKER_USER
         password: $DOCKER_PASSWORD
         logout: true
 
     - name: Docker Push
-      uses: ./
       working-directory: ./frontend
       run: docker image push danverh/react-sample:latest
