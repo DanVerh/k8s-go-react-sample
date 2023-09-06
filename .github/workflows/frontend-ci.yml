@@ -30,4 +30,6 @@ jobs:
         logout: true
 
     - name: Docker Push
+      uses: ./
+      working-directory: ./frontend
       run: docker image push danverh/react-sample:latest
