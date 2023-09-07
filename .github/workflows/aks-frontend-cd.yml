@@ -78,22 +78,22 @@ jobs:
           use-kubelogin: 'true'
 
       # Runs Helm to create manifest files
-      #- name: Bake deployment
-      #  uses: azure/k8s-bake@v2
-      #  with:
-      #    renderEngine: "helm"
-      #    helmChart: ${{ env.CHART_PATH }}
+      - name: Bake deployment
+        uses: azure/k8s-bake@v2
+        with:
+          renderEngine: "helm"
+          helmChart: ${{ env.CHART_PATH }}
           #overrideFiles: ${{ env.CHART_OVERRIDE_PATH }}
           #overrides: |
             #replicas:2
-      #    helm-version: "latest"
-      #  id: bake
+          helm-version: "latest"
+        id: bake
 
       # Deploys application based on manifest files from previous step
       - name: Deploy application
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
-          manifests: ${{ env.CHART_PATH }}
+          manifests: ${{ steps.bake.outputs.manifestsBundle }}
           #images: |
             #${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
