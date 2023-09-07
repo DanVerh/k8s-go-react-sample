@@ -82,8 +82,7 @@ jobs:
           helmChart: helm/frontend
           helm-version: "latest"
           overrides: |
-            containers:
-              imageVersion: ${{ github.sha }}
+            imageVersion: ${{ github.sha }}
         id: bake
 
       # Deploys application based on manifest files from previous step
@@ -140,8 +139,7 @@ jobs:
           helmChart: helm/frontend
           overrideFiles: helm/frontend/prod-values.yaml
           overrides: |
-            containers:
-              imageVersion: ${{ github.sha }}
+            imageVersion: ${{ github.sha }}
           helm-version: "latest"
         id: bake
   

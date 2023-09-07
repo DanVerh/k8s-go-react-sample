@@ -19,7 +19,7 @@ spec:
       containers:
         # Image specs
       - name: frontend
-        image: danverh/react-sample:{{ .Values.containers.imageVersion }}
+        image: danverh/react-sample:{{ .Values.imageVersion }}
         ports:
         - containerPort: 80
         # Resources

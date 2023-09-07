@@ -1,5 +1,4 @@
 namespace: stage
 
 replicas: 1
-containers:
-  imageVersion: latest
+imageVersion: latest
