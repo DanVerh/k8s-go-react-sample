@@ -42,7 +42,7 @@ on:
 env:
   RESOURCE_GROUP: "1-05808405-playground-sandbox"
   CLUSTER_NAME: "sample-app"
-  CHART_PATH: "helm/namespace"
+  CHART_PATH: "helm/frontend"
   #CHART_OVERRIDE_PATH: "your-chart-override-path"
 
 jobs:
