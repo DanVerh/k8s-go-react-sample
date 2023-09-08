@@ -3,5 +3,4 @@ namespace: stage
 
 # Deployment variables
 replicas: 1
-containers:
-  imageVersion: latest
+imageVersion: latest
