@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
     paths:
       - ".github/workflows/ingress.yml"
-      - "helm/ingress.yaml"
+      - "helm/ingress/**"
   pull_request:
     branches: [ "main" ]
     
@@ -58,6 +58,17 @@ jobs:
             --create-namespace \
             --namespace $NAMESPACE \
             --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz
+
+      # Runs Helm to create manifest files
+      - name: Bake deployment
+        uses: azure/k8s-bake@v2
+        with:
+          renderEngine: "helm"
+          helmChart: helm/ingress
+          helm-version: "latest"
+          overrides: |
+            imageVersion:${{ github.sha }}
+        id: bake
   
       # Deploys application based on manifest files from previous step
       - name: Deploy application
@@ -65,5 +76,5 @@ jobs:
         with:
           action: deploy
           namespace: prod
-          manifests: "helm/ingress.yaml"
+          manifests: ${{ steps.bake.outputs.manifestsBundle }}
   
