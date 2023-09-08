@@ -1,12 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-metadata:
-  name: hello-world-ingress-static
-  namespace: prod
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
-    nginx.ingress.kubernetes.io/use-regex: 'true'
+annotations:
+  nginx.ingress.kubernetes.io/rewrite-target: /$2
+  nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+  nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   ingressClassName: nginx
   rules:
@@ -19,10 +16,10 @@ spec:
                 name: frontend-lb
                 port:
                   number: 80
-          #- path: /backend(/|$)(.*)
-          #  pathType: Prefix
-          #  backend:
-          #    service:
-          #      name: backend-lb
-          #      port:
-          #        number: 80
+          - path: /backend(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-lb
+                port:
+                  number: 80
