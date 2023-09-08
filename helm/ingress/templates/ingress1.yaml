@@ -4,7 +4,7 @@ metadata:
   name: ingress1
   namespace: prod
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.org/rewrites: "serviceName=back rewrite=/"
     #nginx.ingress.kubernetes.io/ssl-redirect: 'false'
     #nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
@@ -12,17 +12,17 @@ spec:
   rules:
     - http:
         paths:
-          - path: /
+          - path: /frontend
             pathType: Prefix
             backend:
               service:
                 name: frontend-lb
                 port:
                   number: 80
-          #- path: /backend(/|$)(.*)
-          #  pathType: Prefix
-          #  backend:
-          #    service:
-          #      name: backend-lb
-          #      port:
-          #        number: 80
+          - path: /backend
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-lb
+                port:
+                  number: 80
