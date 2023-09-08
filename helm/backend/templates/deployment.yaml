@@ -19,7 +19,7 @@ spec:
       containers:
         # Image specs
       - name: backend
-        image: danverh/go-sample:{{ .Values.containers.imageVersion }}
+        image: danverh/go-sample:{{ .Values.imageVersion }}
         ports:
         - containerPort: 8080
         # Resources

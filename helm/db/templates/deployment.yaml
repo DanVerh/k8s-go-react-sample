@@ -19,7 +19,7 @@ spec:
       containers:
         # Image specs
       - name: db
-        image: danverh/db-sample:{{ .Values.containers.imageVersion }}
+        image: danverh/db-sample:{{ .Values.imageVersion }}
         ports:
         - containerPort: 5432
         # Probes
