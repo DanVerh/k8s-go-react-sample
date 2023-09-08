@@ -58,6 +58,8 @@ jobs:
             --create-namespace \
             --namespace $NAMESPACE \
             --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz
+          
+          kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
 
       # Runs Helm to create manifest files
       - name: Bake deployment
