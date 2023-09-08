@@ -9,7 +9,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://20.253.98.114/backend');
+      const response = await fetch('backend-lb');
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
