@@ -1,0 +1,69 @@
+name: Ingress Deployment
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - ".github/workflows/ingress.yml"
+      - "helm/ingress.yaml"
+  pull_request:
+    branches: [ "main" ]
+    
+
+jobs:
+# DEPLOY TO PROD
+
+  deployToProd:
+    
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+    runs-on: ubuntu-latest
+    environment: prod
+    
+    steps:
+      # Checks out the repository this file is in
+      - uses: actions/checkout@v3
+  
+      # Logs in with your Azure credentials
+      - name: Azure login
+        uses: azure/login@v1.4.6
+        with:
+          creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{   secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"${{ secrets.  AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
+  
+      # Use kubelogin to configure your kubeconfig for Azure auth
+      - name: Set up kubelogin for non-interactive login
+        uses: azure/use-kubelogin@v1
+        with:
+          kubelogin-version: 'v0.0.25'
+  
+      # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
+      - name: Get K8s context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: ${{ vars.RESOURCE_GROUP }}
+          cluster-name: ${{ vars.CLUSTER_NAME }}
+          admin: 'false'
+          use-kubelogin: 'true'
+
+      - name: Install nginx controller
+        run: | 
+          NAMESPACE=ingress-basic
+  
+          helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+          helm repo update
+          
+          helm install ingress-nginx ingress-nginx/ingress-nginx \
+            --create-namespace \
+            --namespace $NAMESPACE \
+            --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz
+  
+      # Deploys application based on manifest files from previous step
+      - name: Deploy application
+        uses: Azure/k8s-deploy@v4
+        with:
+          action: deploy
+          namespace: prod
+          manifests: "helm/ingress.yaml"
+  
