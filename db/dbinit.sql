@@ -10,7 +10,7 @@ CREATE TABLE messages
 );
 
 INSERT INTO messages (lang, hello) 
-VALUES ('Go', 'Hello, Go!');
+VALUES ('Go', 'Hello, Go');
 
 INSERT INTO messages (lang, hello) 
-VALUES ('JS', 'Hello, JavaScript!')
+VALUES ('JS', 'Hello, JavaScript')
