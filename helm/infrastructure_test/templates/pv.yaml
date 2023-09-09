@@ -19,7 +19,7 @@ spec:
     # character `#` and `/` are reserved for internal use and cannot be used in volumehandle
     volumeHandle: {{ .Values.resourceGroup }}#{{ .Values.storageAccount }}#{{ .Values.containerName }}
     volumeAttributes:
-      resourceGroup: {{ .Values.resourceGroup }}
-      storageAccount: {{ .Values.storageAccount }}
-      containerName: {{ .Values.containerName }}
+      resourceGroup: "{{ .Values.resourceGroup }}"
+      storageAccount: "{{ .Values.storageAccount }}"
+      containerName: "{{ .Values.containerName }}"
       protocol: nfs
