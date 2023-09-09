@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: blob.csi.azure.com
-  name: sample-app-pv
+  name: pv-blob
   namespace: prod
 spec:
   capacity:
@@ -17,7 +17,7 @@ spec:
     readOnly: false
     # make sure volumeid is unique for every identical storage blob container in the cluster
     # character `#` and `/` are reserved for internal use and cannot be used in volumehandle
-    volumeHandle: sample-app-pv
+    volumeHandle: {{ .Values.resourceGroup }}#{{ .Values.storageAccount }}#{{ .Values.containerName }}
     volumeAttributes:
       resourceGroup: {{ .Values.resourceGroup }}
       storageAccount: {{ .Values.storageAccount }}
