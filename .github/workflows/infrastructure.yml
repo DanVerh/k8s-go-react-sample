@@ -70,5 +70,5 @@ jobs:
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
-          namespace: stage
+          namespace: prod
           manifests: ${{ steps.bake.outputs.manifestsBundle }}
