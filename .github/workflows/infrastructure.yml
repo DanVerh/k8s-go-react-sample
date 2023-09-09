@@ -8,14 +8,14 @@ jobs:
 
 # DEPLOY TO STAGE
 
-  deployToStage:
+  infraSetup:
   
     permissions:
       actions: read
       contents: read
       id-token: write
     runs-on: ubuntu-latest
-    environment: stage
+    environment: prod
     
     steps:
       # Checks out the repository this file is in
