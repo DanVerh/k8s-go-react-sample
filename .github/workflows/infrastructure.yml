@@ -27,11 +27,10 @@ jobs:
         with:
           creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
       
-      #- name: Create Container for PV
-      #  run: |
-      #    az storage account create --name ${{ github.repository_id }} --resource-group ${{ vars.RESOURCE_GROUP }} --sku Standard_LRS
-      #    az storage container create --name db-pv --connection-string "$(az storage account show-connection-string --name ${{ github.repository_id }} --resource-group ${{ vars.RESOURCE_GROUP }} --query "connectionString" --output tsv)"
-#          connectionString=$(az storage account show-connection-string --name ${{ github.repository_id }} --resource-group ${{ vars.RESOURCE_GROUP }} --query "connectionString" --output tsv)
+      - name: Create Container for PV
+        run: |
+          az storage account create --name ${{ github.repository_id }} --resource-group ${{ vars.RESOURCE_GROUP }} --location eastus --sku Standard_LRS
+          az storage container create --name db-pv --connection-string "$(az storage account show-connection-string --name ${{ github.repository_id }} --resource-group ${{ vars.RESOURCE_GROUP }} --query "connectionString" --output tsv)"
 
       # Use kubelogin to configure your kubeconfig for Azure auth
       - name: Set up kubelogin for non-interactive login
@@ -48,10 +47,10 @@ jobs:
           admin: 'false'
           use-kubelogin: 'true'
 
-      #- name: Create namespaces
-      #  run: |
-      #    kubectl create namespace prod
-      #    kubectl create namespace stage
+      - name: Create namespaces
+        run: |
+          kubectl create namespace prod
+          kubectl create namespace stage
 
       # Runs Helm to create manifest files
       - name: Bake deployment
