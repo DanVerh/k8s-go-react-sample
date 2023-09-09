@@ -33,3 +33,11 @@ spec:
             name: db-secret
         # Pull policy
         imagePullPolicy: Always
+        volumeMounts:
+          - name: sample-app-pv
+            mountPath: "/var/lib/postgresql/data"
+      volumes:
+        - name: sample-app-pv
+          persistentVolumeClaim:
+            claimName: sample-app-pvc
+
