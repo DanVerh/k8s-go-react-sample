@@ -57,7 +57,7 @@ jobs:
         uses: azure/k8s-bake@v2
         with:
           renderEngine: "helm"
-          helmChart: helm/infrastructure_test # remove test after
+          helmChart: helm/infrastructure
           helm-version: "latest"
           overrides: |
             resourceGroup:${{ vars.RESOURCE_GROUP }}
