@@ -140,7 +140,8 @@ jobs:
           helmChart: helm/db
           overrideFiles: helm/db/prod-values.yaml
           overrides: |
-            imageVersion:${{ github.sha }}
+             imageVersion:latest
+#             imageVersion:${{ github.sha }}
           helm-version: "latest"
         id: bake
   
