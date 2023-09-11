@@ -39,5 +39,5 @@ spec:
       volumes:
         - name: sample-app-pv
           persistentVolumeClaim:
-            claimName: sample-app-pvc
+            claimName: my-azurefile
 
