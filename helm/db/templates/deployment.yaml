@@ -39,5 +39,5 @@ spec:
       volumes:
         - name: azure
           persistentVolumeClaim:
-            claimName: pvc-azuredisk
+            claimName: database-pvc
 
