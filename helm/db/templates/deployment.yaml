@@ -23,10 +23,10 @@ spec:
         ports:
         - containerPort: 5432
         # Probes
-        livenessProbe:
-          tcpSocket:
-            port: 5432
-          initialDelaySeconds: 10
+        #livenessProbe:
+        #  tcpSocket:
+        #    port: 5432
+        #  initialDelaySeconds: 10
         # ENV variables
         envFrom:
         - secretRef:
