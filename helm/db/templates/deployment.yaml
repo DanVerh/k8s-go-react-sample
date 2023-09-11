@@ -34,10 +34,10 @@ spec:
         # Pull policy
         imagePullPolicy: Always
         volumeMounts:
-          - name: sample-app-pv
-            mountPath: "/var/lib/postgresql/data"
+          - name: azure
+            mountPath: /var/lib/postgresql/data
       volumes:
-        - name: sample-app-pv
+        - name: azure
           persistentVolumeClaim:
-            claimName: azure-managed-disk
+            claimName: pvc-azuredisk
 

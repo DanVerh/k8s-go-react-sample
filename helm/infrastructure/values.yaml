@@ -1,3 +1,4 @@
 resourceGroup: resourceGroupName
+subscription: subscriptionId
 storageAccount: storageAccountName
-containerName: db-pv
+diskName: diskName
