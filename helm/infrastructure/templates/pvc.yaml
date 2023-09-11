@@ -1,13 +1,11 @@
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  name: sample-app-pvc
-  namespace: prod
+  name: my-azurefile
 spec:
   accessModes:
     - ReadWriteMany
+  storageClassName: my-azurefile
   resources:
     requests:
       storage: 100Mi
-  volumeName: sample-app-pv
-  storageClassName: azureblob-nfs-premium
