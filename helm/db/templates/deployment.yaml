@@ -21,7 +21,7 @@ spec:
       - name: db
         image: danverh/db-sample:{{ .Values.imageVersion }}
         ports:
-        - containerPort: 5432
+        - containerPort: 3306 # for mariadb
         # Probes
         #livenessProbe:
         #  tcpSocket:
@@ -35,7 +35,7 @@ spec:
         imagePullPolicy: Always
         volumeMounts:
           - name: azure
-            mountPath: /var/lib/postgresql/data
+            mountPath: /var/lib/mysql  #/var/lib/postgresql/data
       volumes:
         - name: azure
           persistentVolumeClaim:
