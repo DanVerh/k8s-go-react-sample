@@ -27,10 +27,10 @@ jobs:
         with:
           creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
       
-      #- name: Create Container for PV
-      #  run: |
-      #    az storage account create --name ${{ github.repository_id }} --resource-group ${{ vars.RESOURCE_GROUP }} --location eastus --sku Standard_LRS
-      #    az storage container create --name db-pv --connection-string "$(az storage account show-connection-string --name ${{ github.repository_id }} --resource-group ${{ vars.RESOURCE_GROUP }} --query "connectionString" --output tsv)"
+      - name: Create Container for PV
+        run: |
+          az storage account create --name ${{ github.repository_id }} --resource-group ${{ vars.RESOURCE_GROUP }} --location eastus --sku Standard_LRS
+          az storage container create --name db-pv --connection-string "$(az storage account show-connection-string --name ${{ github.repository_id }} --resource-group ${{ vars.RESOURCE_GROUP }} --query "connectionString" --output tsv)"
 
       #- name: Create a managed disk for PV
       #  run: |
@@ -69,7 +69,8 @@ jobs:
           overrides: |
             resourceGroup:${{ vars.RESOURCE_GROUP }}
             subscription:${{ secrets.AZURE_SUBSCRIPTION_ID }}
-            diskName:${{ github.repository_id }}
+            storageAccount:${{ github.repository_id }}
+#            diskName:${{ github.repository_id }}
         id: bake
 
       # Deploys application based on manifest files from previous step
