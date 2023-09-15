@@ -4,7 +4,6 @@ metadata:
   annotations:
     pv.kubernetes.io/provisioned-by: disk.csi.azure.com
   name: pv-azuredisk
-  namespce: stage
 spec:
   capacity:
     storage: 1Gi
