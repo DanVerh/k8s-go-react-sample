@@ -1,82 +1,75 @@
 package main
 
 import (
-	"fmt"
+	"database/sql"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
-	"database/sql"
-	_ "github.com/lib/pq"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 const (
 	host     = "db-clusterip"
-	port     = 5432
-	user     = "postgres"
+	port     = 3306
+	user     = "root"
 	password = "admin"
 	dbname   = "db"
-  )
+)
 
 func main() {
-
-// Connect to the DB
-
-	psqlInfo := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable", 
-		user,
-        password,
-        host,
-        port,
-        dbname)
-
-	// Validate provided arguments for the connection
-	db, err := sql.Open("postgres", psqlInfo)
+	// Connect to the MariaDB database
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", user, password, host, port, dbname))
 	if err != nil {
-  		panic(err)
+		log.Fatal(err)
 	}
 	defer db.Close()
 	fmt.Println("DB connection arguments are valid")
 
-	// Open the test connection to DB
+	// Open a test connection to the DB
 	err = db.Ping()
 	if err != nil {
-  		panic(err)
+		log.Fatal(err)
 	}
 	fmt.Println("DB connection succeeded")
-
-
-
-// Getting results from the query
 
 	// Query the DB
 	rows, err := db.Query("SELECT hello FROM messages")
 	if err != nil {
-	  panic(err)
+		log.Fatal(err)
 	}
-	// Close the connection to DB
 	defer rows.Close()
 
-	// Define JSON objects array
+	// Define a slice to hold JSON objects
 	var jsonArray []map[string]string
 
 	// Iterate through result rows
 	for rows.Next() {
 		var hello string
-		err = rows.Scan(&hello)
-		if err != nil {
-		  panic(err)
+		if err := rows.Scan(&hello); err != nil {
+			log.Fatal(err)
 		}
 
 		jsonObject := make(map[string]string)
 		jsonObject["hello"] = hello
-	
+
 		jsonArray = append(jsonArray, jsonObject)
 	}
 
-	// get any error encountered during iteration
-	err = rows.Err()
-	if err != nil {
-	  panic(err)
+	// Get any error encountered during iteration
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
 	}
+
+	// Convert the JSON array to a JSON string
+	jsonData, err := json.Marshal(jsonArray)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Print the JSON data
+	fmt.Println(string(jsonData))
 
 
 // Run the Web server and server the results in JSON

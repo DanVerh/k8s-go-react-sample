@@ -24,7 +24,7 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Docker Build
-      working-directory: ./db_mariadb
+      working-directory: ./db
       run: docker image build --tag danverh/db-sample:${{ github.sha }} .
     
     - name: Docker Login
@@ -34,7 +34,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Docker Push
-      working-directory: ./db_mariadb
+      working-directory: ./db
       run: docker image push danverh/db-sample:${{ github.sha }}
 
 

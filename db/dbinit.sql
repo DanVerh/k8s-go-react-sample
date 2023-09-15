@@ -1,16 +1,16 @@
 CREATE DATABASE db;
 
-\c db
+USE db;
 
 CREATE TABLE messages
 ( 
-    id serial primary key,
-    lang varchar(50) NOT NULL,
-    hello varchar(50) NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    lang VARCHAR(50) NOT NULL,
+    hello VARCHAR(50) NOT NULL
 );
 
 INSERT INTO messages (lang, hello) 
 VALUES ('Go', 'Hello, Go');
 
 INSERT INTO messages (lang, hello) 
-VALUES ('JS', 'Hello, JavaScript')
+VALUES ('JS', 'Hello, JavaScript');
