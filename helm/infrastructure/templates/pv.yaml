@@ -7,7 +7,7 @@ metadata:
   namespace: stage
 spec:
   capacity:
-  storage: 1Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain # If set as "Delete" container would be removed after pvc deletion storageClassName: azureblob-nfs-premium
