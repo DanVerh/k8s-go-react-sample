@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: app-resourcequota
-  namespace: prod
+  namespace: stage
 spec:
   hard:
     pods: 50
