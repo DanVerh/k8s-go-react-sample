@@ -1,4 +1,4 @@
 resourceGroup: resourceGroupName
 subscription: subscriptionId
 storageAccount: storageAccountName
-#diskName: diskName
+diskName: diskName

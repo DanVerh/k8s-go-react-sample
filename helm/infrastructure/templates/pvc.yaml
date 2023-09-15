@@ -1,12 +1,13 @@
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  name: sample-app-pvc
+  name: pvc-azuredisk
+  namespace: stage
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-  volumeName: sample-app-pv
-  storageClassName: azureblob-nfs-premium
+  volumeName: pv-azuredisk
+  storageClassName: managed-csi

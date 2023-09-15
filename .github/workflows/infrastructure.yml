@@ -34,12 +34,12 @@ jobs:
       #    az aks update --enable-blob-driver -n ${{ vars.CLUSTER_NAME }} -g ${{ vars.RESOURCE_GROUP }}
       #    az aks update --enable-blob-driver -n sample-app -g 1-c4906505-playground-sandbox
 
-      #- name: Create a managed disk for PV
-      #  run: |
-      #    az disk create \
-      #    --resource-group ${{ vars.RESOURCE_GROUP }} \
-      #    --name ${{ github.repository_id }} \
-      #    --size-gb 2
+      - name: Create a managed disk for PV
+        run: |
+          az disk create \
+          --resource-group ${{ vars.RESOURCE_GROUP }} \
+          --name ${{ github.repository_id }} \
+          --size-gb 1
 
       # Use kubelogin to configure your kubeconfig for Azure auth
       - name: Set up kubelogin for non-interactive login
@@ -71,8 +71,8 @@ jobs:
           overrides: |
             resourceGroup:${{ vars.RESOURCE_GROUP }}
             subscription:${{ secrets.AZURE_SUBSCRIPTION_ID }}
-            storageAccount:${{ github.repository_id }}
-#            diskName:${{ github.repository_id }}
+            diskName:${{ github.repository_id }}
+#            storageAccount:${{ github.repository_id }}
         id: bake
 
       # Deploys application based on manifest files from previous step

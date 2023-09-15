@@ -34,10 +34,10 @@ spec:
         # Pull policy
         imagePullPolicy: Always
         volumeMounts:
-          - name: azure
+          - name: azure-disk
             mountPath: /var/lib/mysql
       volumes:
-        - name: azure
+        - name: azure-disk
           persistentVolumeClaim:
-            claimName: sample-app-pvc
+            claimName: pvc-azuredisk
 
